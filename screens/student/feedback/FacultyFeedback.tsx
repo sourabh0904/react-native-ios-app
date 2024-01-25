@@ -18,6 +18,7 @@ import { Formik, useFormik, useFormikContext } from 'formik';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import CMScard from '../../../components/cms_card';
 import { Rating } from 'react-native-ratings';
+import { useReducedMotion } from 'react-native-reanimated';
 const FacultyFeedbackStatus = () => {
     const window = useWindowDimensions();
     const theme:themeType = useTheme();
@@ -207,6 +208,7 @@ const FacultyFeedbackBottomSheet = props=>{
   const Modalref = useRef(null);
 
   const dismissModal = useCallback(()=>props.setModal(false) , []);
+  const reducedMotion = useReducedMotion();
 
   useEffect(()=>{
     if(props.open){
@@ -224,6 +226,7 @@ const FacultyFeedbackBottomSheet = props=>{
      onPress={()=>props.setModal(false)} style={{height:window.height, width:window.width, position:"absolute" , display:props.open?"flex":"none" }}>
 
     <BottomSheetModal
+                animateOnMount={!useReducedMotion}
                 ref = {Modalref}
                 index={0}
                 snapPoints={[500 , window.height - 100]}

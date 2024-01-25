@@ -14,6 +14,7 @@ import { BottomSheetFlatList, BottomSheetModal, BottomSheetModalProvider } from 
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import ProgressCustom from '../../../../components/progressCustom';
 import { useBackHandler } from '@react-native-community/hooks';
+import { useReducedMotion } from 'react-native-reanimated';
 
 
 const SubjectAttendance:FC<any> = () => {
@@ -325,6 +326,7 @@ const AttendanceListBottomSheet= props=>{
 
 
               const dismissModal = useCallback(()=>props.setModal(false) , [])
+              const ReducedMotion = useReducedMotion();
 
             return (
 
@@ -332,6 +334,7 @@ const AttendanceListBottomSheet= props=>{
             <BottomSheetModal
                 ref = {Modalref}
                 index={0}
+                animateOnMount={!ReducedMotion}
                 enableDismissOnClose
                 snapPoints={[500 , window.height - 100]}
                 onDismiss={dismissModal}

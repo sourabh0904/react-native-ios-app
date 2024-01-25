@@ -36,7 +36,8 @@ const LoginPage:FC = () =>{
     
 
 return (
-  <IosSafeArea>
+  // <IosSafeArea>
+  <>
     <StatusBar backgroundColor={theme.colors.primaryContainer} barStyle={"dark-content"}/>
   <ImageBackground
     source={require('../../../assets/images/IPS-3417.png')}
@@ -58,7 +59,8 @@ return (
       <Tab.Screen name="Staff" component={StaffLogin} />
     </Tab.Navigator>
   </ImageBackground>
-  </IosSafeArea>
+  </>
+  // </IosSafeArea>
 );
 
 }

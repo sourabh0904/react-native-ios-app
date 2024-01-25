@@ -34,7 +34,7 @@ const CustomHeader = (props:NativeStackHeaderProps) => {
     })
 
   return (
-    <IosSafeArea color={theme.colors.container_background} barStyle='dark-content'>
+    // <IosSafeArea color={theme.colors.container_background} barStyle='dark-content'>
       <ScreenStackHeaderSubview collapsable  style={styles.headerContainer}>
         <View style={{flex:1, flexDirection : 'row' , paddingHorizontal:10, alignItems:"center" }}>
           <Button compact={true}style={{height:40 , width:50,  backgroundColor:"white"}} onPress={()=>props.navigation.goBack()}><Icon name="arrow-left" style={{top : 3}} size={25} /></Button>
@@ -45,7 +45,7 @@ const CustomHeader = (props:NativeStackHeaderProps) => {
           <IconButton name="arrow-left" size={10} />
         </View>
       </ScreenStackHeaderSubview>
-      </IosSafeArea>
+      // </IosSafeArea>
   )
 }
 

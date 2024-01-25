@@ -5,6 +5,7 @@ import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { themeType } from '../../../theme';
 import MenuList from './MenuList';
 import { useTheme } from 'react-native-paper';
+import { useReducedMotion } from 'react-native-reanimated';
 
 type menuProp = {
     open : boolean,
@@ -35,15 +36,18 @@ const MenuBottomSheet = (props : menuProp) => {
   const Modalref: any = useRef<BottomSheet>(null);
 
   useEffect(()=>{
+    console.log(props.open);
     if ( props.open) Modalref.current.present();
     else Modalref.current.dismiss();
   },[props.open])
 
   const window = useWindowDimensions();
+  const reducedMotion = useReducedMotion();
 
   return (
     <Pressable onPress={()=>props.changeOpen(false)} style={{height:window.height, width:window.width, position:"absolute" , display:props.open?"flex":"none" }}>
      <BottomSheetModal
+     animateOnMount={!reducedMotion}
               ref={Modalref}
               index={0}
               snapPoints={[310]}

@@ -31,6 +31,7 @@ target 'cms_react_native' do
   # Flags change depending on the env values.
   flags = get_default_flags()
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
   use_react_native!(
     :path => config[:reactNativePath],
     # Hermes is now enabled by default. Disable by setting this flag to false.
@@ -60,3 +61,4 @@ target 'cms_react_native' do
     __apply_Xcode_12_5_M1_post_install_workaround(installer)
   end
 end
+

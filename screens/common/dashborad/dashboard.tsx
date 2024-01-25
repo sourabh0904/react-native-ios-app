@@ -33,7 +33,7 @@ import {
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Feather';
 import {themeType} from '../../../theme';
-import Animated, {blue} from 'react-native-reanimated';
+import Animated, {blue, useReducedMotion} from 'react-native-reanimated';
 import BottomSheet, {
   BottomSheetModal,
   BottomSheetModalProvider,
@@ -135,7 +135,7 @@ const Dashboard = () => {
 
   const snapPoints = useMemo(
     () => [window.height - 200, window.height - 60],
-    [window],
+    [window.height],
   );
   const bottomSheetRef = useRef<BottomSheet>(null);
   const profileSVRef = useRef(null);
@@ -145,6 +145,8 @@ const Dashboard = () => {
 
   // @ts-ignore
   const user = useSelector((store:RootState) => store.common.User.user);
+
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     if (user.type == userType.student) setDashOptions(StudentDashOptions);
@@ -183,6 +185,7 @@ const Dashboard = () => {
 
   
   useBackHandler(()=>{
+    console.log("back from dashborad")
     setExitDialogVisible(true);
     return true;
   })
@@ -217,11 +220,12 @@ const Dashboard = () => {
       });
     }
   } )
+  
 
   return (
-    <IosSafeArea
-      color={theme.colors.container_background}
-      barStyle="dark-content">
+    // <IosSafeArea
+    //   color={theme.colors.container_background}
+    //   barStyle="dark-content">
       <GestureHandlerRootView style={{flex: 1}}>
         <BottomSheetModalProvider>
           <ExitDialog
@@ -309,6 +313,7 @@ const Dashboard = () => {
             </View>
           </View>
           <BottomSheet
+            animateOnMount={!reducedMotion}
             ref={bottomSheetRef}
             snapPoints={profile ? [230] : snapPoints}
             index={0}
@@ -325,15 +330,19 @@ const Dashboard = () => {
                 <CMScard>
                   {DashOptions.map((item, index) => (
                     <View key={index} style={styles.progressStyle}>
-                      {/* <IconButton
+                      <Button
                         // @ts-ignore
                         onPress={() => navigator.navigate(item.to)}
                         style={styles.IconButton}
-                        icon={item.icon}
-                        iconColor={theme.colors.scrim}
                         rippleColor={theme.colors.backdrop}
-                        size={theme.icon.button_size}
-                      /> */}
+                      >
+                        <Icon
+                          name={item.icon}
+                          size={theme.icon.button_size}
+                          color={theme.colors.black}
+                          style={{height: 50, width: 30 ,padding: 0 , alignSelf:"center",}}
+                        />
+                      </Button>
                       <Text
                         numberOfLines={2}
                         style={{color: theme.colors.scrim, textAlign: 'center'}}>
@@ -399,7 +408,7 @@ const Dashboard = () => {
           <MenuBottomSheet open={menuOpen} changeOpen={setMenuOpen} />
         </BottomSheetModalProvider>
       </GestureHandlerRootView>
-    </IosSafeArea>
+    // </IosSafeArea>
   );
 };
 

@@ -11,6 +11,7 @@ import CustomHeader from '../components/customHeader';
 import { navigationRef, storage } from '../App';
 import { useDispatch } from 'react-redux';
 import { commonActionTypes } from '../redux/common/types';
+import IosSafeArea from '../components/iosSafeArea';
 
 
 const Stack = createNativeStackNavigator();
@@ -43,6 +44,7 @@ const Routes = () => {
           }
     }, [])
   return (
+    <IosSafeArea>
     <NavigationContainer ref={navigationRef} theme={{colors:{text: theme.colors.scrim , background:theme.colors.white , card:theme.colors.white }}}>
         <Stack.Navigator screenOptions={screenOptions}>
             <Stack.Group>
@@ -56,6 +58,7 @@ const Routes = () => {
             </Stack.Group>
         </Stack.Navigator>
     </NavigationContainer>
+    </IosSafeArea>
   )
 }
 

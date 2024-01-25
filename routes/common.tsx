@@ -19,6 +19,7 @@ const commonScreenProps:(RouteConfig<ParamListBase, string, StackNavigationState
         name: "Dashboard",
         component: Dashboard,
         options:{
+            gestureEnabled: false,
             animation :"fade_from_bottom"
         }
     },
